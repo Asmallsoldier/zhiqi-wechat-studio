@@ -1,0 +1,39 @@
+name: wechat-studio-oss
+services:
+  api:
+    build: ./backend
+    restart: unless-stopped
+    environment:
+      STUDIO_MODE: standalone
+      STUDIO_DB_PATH: /data/studio.db
+      STUDIO_ENCRYPTION_KEY: ${STUDIO_ENCRYPTION_KEY:-}
+      STUDIO_AI_BASE_URL: ${STUDIO_AI_BASE_URL:-}
+      STUDIO_AI_KEY: ${STUDIO_AI_KEY:-}
+      STUDIO_AI_MODEL: ${STUDIO_AI_MODEL:-}
+      STUDIO_AI_DAILY_LIMIT: ${STUDIO_AI_DAILY_LIMIT:-5}
+      XIANYU_PROVIDER_URL: ${XIANYU_PROVIDER_URL:-}
+      XIANYU_PROVIDER_KEY: ${XIANYU_PROVIDER_KEY:-}
+      STUDIO_DRAFT_ENABLED: ${STUDIO_DRAFT_ENABLED:-false}
+      STUDIO_PUBLISH_ENABLED: ${STUDIO_PUBLISH_ENABLED:-false}
+      STUDIO_PUBLISH_DAILY_LIMIT: ${STUDIO_PUBLISH_DAILY_LIMIT:-5}
+      STUDIO_EMERGENCY_STOP: ${STUDIO_EMERGENCY_STOP:-false}
+      STUDIO_SOURCE_SCHEDULER: ${STUDIO_SOURCE_SCHEDULER:-false}
+      STUDIO_PIPELINE_WORKER: 'true'
+    volumes:
+      - studio-data:/data
+    security_opt:
+      - no-new-privileges:true
+    networks: [studio]
+  web:
+    build: ./web
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - '${STUDIO_BIND_ADDRESS:-127.0.0.1}:${STUDIO_PORT:-3103}:80'
+    networks: [studio]
+volumes:
+  studio-data:
+networks:
+  studio:

@@ -1,0 +1,20 @@
+import request from '@/utils/request'
+export const getWechatAutomation = () => request.get('/wechat-automation/status')
+export const saveWechatAutomationPlan = (data: Record<string, any>) => request.post('/wechat-automation/plans', data)
+export const setWechatAutomationEnabled = (id: string, enabled: boolean) => request.post(`/wechat-automation/plans/${id}/${enabled ? 'enable' : 'pause'}`)
+export const getWechatNewsSources = () => request.get('/wechat-operations/news-sources')
+export const createWechatWorkflowTemplate = () => request.post('/wechat-automation/workflow-template')
+export const runWechatAutomationPlanOnce = (planId: string, data: { planVersion: number; requestId: string }) => request.post(`/wechat-automation/plans/${planId}/run-once`, data)
+export const getWechatAutomationResumeOptions = (runId: string) => request.get(`/wechat-automation/runs/${encodeURIComponent(runId)}/resume-options`)
+export const resumeWechatAutomationRun = (runId: string, data: { planVersion: number; requestId: string; acknowledgeResume: true }) => request.post(`/wechat-automation/runs/${encodeURIComponent(runId)}/resume`, data)
+export const getWechatEditorialProfile = (accountId: string) => request.get(`/wechat-operations/accounts/${encodeURIComponent(accountId)}/editorial-profile`)
+export const saveWechatEditorialProfile = (accountId: string, data: Record<string, any>) => request.put(`/wechat-operations/accounts/${encodeURIComponent(accountId)}/editorial-profile`, data)
+export const getWechatNewsSourceHealth = () => request.get('/wechat-operations/news-sources/health')
+export const checkWechatNewsSourceHealth = (feedId: string) => request.post(`/wechat-operations/news-sources/${encodeURIComponent(feedId)}/health`)
+export const getWechatAccountCoverReadiness = (accountId: string) => request.get(`/wechat-operations/accounts/${encodeURIComponent(accountId)}/cover-readiness`)
+export const getWechatDraftEditor = (runId: string) => request.get(`/wechat-automation/runs/${encodeURIComponent(runId)}/draft-editor`)
+export const reviseWechatDraft = (runId: string, data: { planVersion: number; requestId: string; sourceContentHash: string; title: string; body: string; summary: string; acknowledgeReviewAndDraftDelivery: true }) => request.post(`/wechat-automation/runs/${encodeURIComponent(runId)}/revise-draft`, data)
+
+export const checkWechatNewsSource = (feedId: string) => request.post(`/wechat-operations/news-sources/${encodeURIComponent(feedId)}/collect`)
+
+export const getWechatContentDirections = () => request.get('/wechat-operations/news-sources/directions')

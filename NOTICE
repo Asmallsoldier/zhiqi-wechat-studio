@@ -1,0 +1,13 @@
+WeChat Studio / 智启图文
+Copyright 2026 WeChat Studio contributors
+
+Project-authored source and documentation are licensed under Apache License 2.0.
+Third-party components, fonts, services, brands, source articles and marketplace
+data retain their own rights and license terms. No endorsement by WeChat,
+Tencent, Xianyu, Alibaba, model providers or listed news sources is implied.
+
+TDesign components and icons: see web/THIRD_PARTY_NOTICES.md.
+Exact installed dependency metadata: docs/dependencies.json.
+Dependency packages installed during builds include their own license notices.
+This source release contains no production database, account credentials,
+provider subscription, scraped content corpus or model weights.

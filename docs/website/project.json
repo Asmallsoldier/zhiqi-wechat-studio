@@ -1,0 +1,17 @@
+{
+  "slug": "wechat-studio",
+  "name": "智启图文",
+  "englishName": "WeChat Studio",
+  "version": "0.3.0",
+  "status": "开源准备中",
+  "tagline": "从资料研究到图文发表，让公众号运营有依据、有配图、有结果。",
+  "description": "可独立部署的AI公众号内容运营平台，连接资讯选题、数码选品分析、文章创作、原创资料图解与微信投递。",
+  "license": "Apache-2.0",
+  "repositoryUrl": null,
+  "demoUrl": null,
+  "tags": ["AI内容创作", "微信公众号", "数码选品", "私有部署"],
+  "stack": ["Vue 3", "TypeScript", "FastAPI", "SQLite", "Docker Compose"],
+  "features": ["资讯资料与来源健康", "数码选品和价格核验", "AI文章和正文资料图解", "草稿与可选正式发表", "任务进度和最终链接", "独立登录与加密账号管理"],
+  "limitations": ["真实商品数据需授权提供方或合法资料导入", "正式发表受微信公众号权限约束", "完整真实链路仍待验收", "不包含主动群发", "独立定时运营计划和团队共享待完善"],
+  "updatedAt": "2026-10-29"
+}

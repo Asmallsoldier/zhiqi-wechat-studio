@@ -1,0 +1,15 @@
+import request from '@/utils/request'
+const account = (id: string) => `/wechat-workspace/accounts/${encodeURIComponent(id)}`
+export const getWechatAccounts = () => request.get('/wechat-workspace/accounts')
+export const getWechatWorkflows = () => request.get('/wechat-workspace/workflows')
+export const createWechatAccount = (data: { requestId: string; accountName: string; platformAccountId: string }) => request.post('/wechat-workspace/accounts', data)
+export const updateWechatAccount = (id: string, data: { accountName: string; platformAccountId: string }) => request.put(account(id), data)
+export const getWechatCredential = (id: string) => request.get(`${account(id)}/credential`)
+export const saveWechatCredential = (id: string, data: { appId: string; appSecret: string }) => request.put(`${account(id)}/credential`, data)
+export const revokeWechatCredential = (id: string) => request.delete(`${account(id)}/credential`)
+export const probeWechatAccount = (id: string) => request.post(`${account(id)}/probe`)
+export const getWorkspaceMaterials = (id: string, page = 1, search = '') => request.get(`${account(id)}/materials`, { params: { page, size: 12, search } })
+export const syncWorkspaceMaterials = (id: string) => request.post(`${account(id)}/materials/sync`, undefined, { params: { page: 1, size: 12 } })
+export const setWorkspaceDefaultMaterial = (id: string, mediaId: string) => request.put(`${account(id)}/materials/default`, { mediaId })
+export const getWechatRunDetail = (id: string) => request.get(`/wechat-workspace/runs/${encodeURIComponent(id)}`)
+export const confirmWechatPublication = (id: string, remoteUrl: string) => request.post(`/wechat-workspace/runs/${encodeURIComponent(id)}/confirm-publication`, { remoteUrl })
