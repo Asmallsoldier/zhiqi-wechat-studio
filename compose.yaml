@@ -25,7 +25,10 @@ services:
       - no-new-privileges:true
     networks: [studio]
   web:
-    build: ./web
+    build:
+      context: ./web
+      args:
+        VITE_BASE_PATH: ${STUDIO_BASE_PATH:-/}
     restart: unless-stopped
     depends_on:
       api:

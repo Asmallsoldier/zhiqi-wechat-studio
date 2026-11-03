@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import {loadProduct} from '@/product'
-const router = createRouter({ history:createWebHistory(), routes:[
+const router = createRouter({ history:createWebHistory(import.meta.env.BASE_URL), routes:[
  {path:'/',redirect:'/studio/wechat'},
  {path:'/login',component:()=>import('@/views/admin/Login.vue'),meta:{public:true}},
  {path:'/studio',component:()=>import('@/layouts/StudioLayout.vue'),meta:{requiresAuth:true},children:[

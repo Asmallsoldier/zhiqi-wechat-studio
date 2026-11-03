@@ -7,6 +7,7 @@ Compose 从私有 `.env` 读取；`.env.example` 只含公开模板。后端直�
 | STUDIO_MODE | standalone；shared 需额外显式配置共享服务 |
 | STUDIO_DB_PATH | 本地 ./data/studio.db，容器 /data/studio.db |
 | STUDIO_BIND_ADDRESS / STUDIO_PORT | Compose 127.0.0.1 / 3103 |
+| STUDIO_BASE_PATH | /；子目录部署可设为 /wechat/，必须以斜杠开头和结尾，重建web后生效 |
 | STUDIO_ENCRYPTION_KEY | 留空时自动生成凭据加密密钥，保存于数据库旁 credential.key，权限0600；必须备份 |
 | STUDIO_EMERGENCY_STOP | false；true 阻断新业务执行及官方执行器 |
 | STUDIO_DRAFT_ENABLED | false；允许上传素材、创建草稿 |

@@ -48,6 +48,25 @@ npm run dev -- --mode wechat
 
 本版任务执行只支持**单个 API 进程、单个副本**。多实例、高可用、共享租户协作需要额外调度与一致性设计；不要直接提高 workers 数量。
 
+## 在已有HTTPS网站下部署
+
+0.3.1支持子目录入口。设置 `STUDIO_BASE_PATH=/wechat/`，前端容器保持仅监听本机独立端口，例如18102。已有HTTPS反向代理把 `/wechat/` 转发到 `http://127.0.0.1:18102/`，转发时去掉路径前缀；前端资源、路由、API、刷新登录及退出均保留子目录。部署前使用 `docker compose up -d --build` 重建前端，不能只改代理路径。
+
+示例Nginx片段（放在已有HTTPS server内）：
+
+```nginx
+location = /wechat { return 308 /wechat/; }
+location /wechat/ {
+  client_max_body_size 2m;
+  proxy_pass http://127.0.0.1:18102/;
+  proxy_set_header Host $host;
+  proxy_set_header X-Forwarded-Proto $scheme;
+  proxy_read_timeout 160s;
+}
+```
+
+不要覆盖已有官网的root、证书或其他路由。没有域名时可先通过SSH隧道访问；运营登录与公众号凭据配置应使用有效HTTPS入口。
+
 ## 已有部署迁移
 
 不读取旧平台数据库或自动复制旧凭据。先单独部署空库验收，再通过受控导出/导入迁移资料，重新配置账号和授权。旧任务、草稿和失败内容不自动补发。`STUDIO_MODE=shared` 与显式 `SHARED_API_ORIGIN` 仅适配旧私有平台接口，不提供该平台代码或可用性保证。

@@ -2,9 +2,10 @@ import axios from 'axios'
 import type { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from 'axios'
 import { useAuthStore } from '@/stores/auth'
 import { addBreadcrumb } from '@/utils/observability'
+import { apiBase, appUrl } from '@/utils/basePath'
 
 const request: AxiosInstance = axios.create({
-  baseURL: '/api/v1',
+  baseURL: apiBase,
   timeout: 30000,
   headers: { 'Content-Type': 'application/json' },
 })
@@ -36,7 +37,7 @@ request.interceptors.response.use(
       if (authStore.refreshToken && !error.config._retry) {
         error.config._retry = true
         try {
-          if (!refreshing) refreshing = axios.post('/api/v1/auth/refresh', {
+          if (!refreshing) refreshing = axios.post(apiBase+'/auth/refresh', {
             refreshToken: authStore.refreshToken,
           }).finally(() => { refreshing = null })
           const res = await refreshing
@@ -50,7 +51,7 @@ request.interceptors.response.use(
         }
       }
       authStore.clearAuth()
-      window.location.href = '/login'
+      window.location.href = appUrl('/login')
     }
     return Promise.reject(error)
   },

@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import request from '@/utils/request'
+import {basePath} from '@/utils/basePath'
 
 export const useAuthStore = defineStore('auth', () => {
   const accessToken = ref('')
@@ -68,7 +69,7 @@ export const useAuthStore = defineStore('auth', () => {
   return { accessToken, refreshToken, userId, role, username, displayName, status, mustChangePassword, permissions, profileLoaded, setAuth, loadProfile, can, updateAccessToken, clearAuth }
 }, {
   persist: {
-    key: 'zhiqi-auth',
+    key: basePath==='/' ? 'zhiqi-auth' : `zhiqi-auth:${basePath}`,
     storage: sessionStorage,
     paths: ['accessToken', 'refreshToken', 'userId', 'role', 'username', 'displayName', 'status', 'mustChangePassword', 'permissions'],
   },

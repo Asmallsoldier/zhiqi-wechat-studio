@@ -1,5 +1,6 @@
 import type { Router } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import {apiBase} from '@/utils/basePath'
 
 export interface Breadcrumb {
   type: string
@@ -25,7 +26,7 @@ const report = async (message: string, stack: string, errorType: string) => {
   if (!auth.accessToken) return
   reporting = true
   try {
-    await fetch('/api/v1/ops/client-errors', {
+    await fetch(apiBase+'/ops/client-errors', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

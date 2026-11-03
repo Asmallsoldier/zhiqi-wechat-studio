@@ -11,6 +11,7 @@ export default defineConfig(({ mode }) => {
   const backendOrigin = apiBase.replace('/api/v1', '')
 
   return {
+    base: env.VITE_BASE_PATH || '/',
     plugins: [
       vue(),
       Components({

@@ -1,8 +1,10 @@
-# 智启图文 · WeChat Studio
+# 智启图文 · Zhiqi WeChat Studio
 
 把公开资料和数码选品研究，变成有依据、有配图、可追踪发表结果的公众号文章。
 
-独立部署的内容运营平台，采用 Vue 3、FastAPI 和 SQLite，默认使用自己的登录、用户角色、账号凭据及微信执行器。无需启动原主平台、PostgreSQL、RabbitMQ 或 Redis。项目源码采用 [Apache-2.0](LICENSE)，当前为 **0.3.0 开源准备版**，尚未对外发布仓库。
+独立部署的内容运营平台，采用 Vue 3、FastAPI 和 SQLite，默认使用自己的登录、用户角色、账号凭据及微信执行器。无需启动原主平台、PostgreSQL、RabbitMQ 或 Redis。项目源码采用 [Apache-2.0](LICENSE)，当前版本 **0.3.1**。
+
+[公开仓库](https://github.com/Asmallsoldier/zhiqi-wechat-studio) · [官方工作台](https://aipip.cn/wechat/)
 
 ## 能做什么
 

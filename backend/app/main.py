@@ -54,7 +54,7 @@ async def lifespan(app):
             except asyncio.CancelledError:pass
     pipeline.worker.sessions.clear()
 
-app=FastAPI(title='智启图文 · 独立研究服务',version='0.3.0',lifespan=lifespan)
+app=FastAPI(title='智启图文 · 独立研究服务',version='0.3.1',lifespan=lifespan)
 
 from .local_identity import LocalError
 @app.exception_handler(LocalError)
@@ -65,7 +65,7 @@ if STUDIO_MODE=='standalone':
     app.include_router(local_router,prefix='/api/v1')
 
 @app.get('/api/v1/product')
-async def product():return {'success':True,'data':{'mode':STUDIO_MODE,'version':'0.3.0','name':'智启图文'}}
+async def product():return {'success':True,'data':{'mode':STUDIO_MODE,'version':'0.3.1','name':'智启图文'}}
 
 def ok(value):return {'success':True,'data':value}
 
@@ -149,7 +149,7 @@ def import_items(items,owner):
 @app.get('/health')
 async def health():
     with db.connect() as conn:conn.execute('SELECT 1')
-    return {'status':'ok','service':'wechat-studio','version':'0.3.0'}
+    return {'status':'ok','service':'wechat-studio','version':'0.3.1'}
 
 @app.get('/api/v1/research/capabilities')
 async def capabilities(owner=Depends(identity)):

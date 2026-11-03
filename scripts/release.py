@@ -43,13 +43,13 @@ def audit(paths):
   raise SystemExit('Public source audit failed')
 
 def main():
- parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--check',action='store_true');parser.add_argument('--output',default='artifacts/wechat-studio-0.3.0-source.zip');args=parser.parse_args()
+ parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--check',action='store_true');parser.add_argument('--output',default='artifacts/wechat-studio-0.3.1-source.zip');args=parser.parse_args()
  paths=files();audit(paths)
  if args.check:print(f'Public source audit passed: {len(paths)} tracked files');return
  output=(ROOT/args.output).resolve()
  if ROOT/'artifacts' not in output.parents:raise SystemExit('Export must stay in artifacts/')
  output.parent.mkdir(exist_ok=True,parents=True)
- manifest={'version':'0.3.0','files':{name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in paths}}
+ manifest={'version':'0.3.1','files':{name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in paths}}
  with zipfile.ZipFile(output,'w',compression=zipfile.ZIP_DEFLATED) as archive:
   for name,content in [(n,(ROOT/n).read_bytes()) for n in paths]+[('SOURCE-MANIFEST.json',json.dumps(manifest,indent=2).encode())]:
    info=zipfile.ZipInfo('wechat-studio/'+name,date_time=(2026,1,1,0,0,0));info.external_attr=0o100644<<16;info.compress_type=zipfile.ZIP_DEFLATED;archive.writestr(info,content)
